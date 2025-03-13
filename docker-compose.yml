@@ -825,3 +825,17 @@ services:
       timeout: 10s
       retries: 10
     logging: *logging
+
+  # Perses
+  perses:
+    image: ${PERSES_IMAGE}
+    container_name: perses
+    restart: always
+    command:
+      - --config=/etc/perses/config.yaml
+      - --log.level=error
+      - --web.listen-address=:8082
+    ports:
+      - "${PERSES_PORT}:${PERSES_PORT}"
+    depends_on:
+      - prometheus
